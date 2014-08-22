@@ -32,7 +32,7 @@ Additional Notes
 - Do not focus too much on the design.
 - The usage of third party libraries (e.g. with CocoaPods) is explicitly allowed.
 - Provide a comprehensive git history.
-
+- If your API request limit exceeds, you can generate and use a personal access token [here](https://github.com/settings/applications) and add `?access_token=<YOUR_ACCESS_TOKEN>` to the request URLs.
 
 Bonus Points
 ------------
