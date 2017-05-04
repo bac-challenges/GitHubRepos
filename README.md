@@ -8,7 +8,7 @@ Prerequisites
 ----------------
 
 - Do not use Storyboards or xib files.
-- Use Objective-C for this challenge.
+- Use Objective-C or Swift for this challenge, whatever you feel more comfortable with.
 - Important for us is code efficiency, following of best practices & code readability.
 - Do not focus too much on the design.
 - The usage of third party libraries (e.g. with CocoaPods) is explicitly allowed.
