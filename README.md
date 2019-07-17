@@ -37,6 +37,6 @@ Bonus Goals
 - Cache the data so it is available offline.
 - Implement a load more mechanism. The load more should be triggered when the scrolling is close to reaching the end of the list. Check out the [pagination documentation][2] for more infos.
 
-  [1]: https://api.github.com/users/xing/repos
+  [1]: https://api.github.com/orgs/xing/repos
   [2]: https://developer.github.com/v3/#pagination
   [3]: https://developer.github.com/v3/repos/#list-organization-repositories
