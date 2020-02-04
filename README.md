@@ -37,4 +37,6 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 * Display owner’s avatar image and cache it accordingly.
 
 ---
+If you have any final comments about your result please let us know via [final_notes.md](final_notes.md)
+
 Now, let's get started. We wish you good luck!
