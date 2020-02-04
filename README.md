@@ -19,7 +19,7 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 
 1. Clone this repository. Use it as your working directory.
 2. Bootstrap a new empty application.
-3. Request the GitHub API to show [XING's public repositories][1] and parse the JSON response. You can find documentation to the call [here](https://developer.github.com/v3/repos/#list-organization-repositories).
+3. Request the GitHub API to show [XING's public repositories](https://api.github.com/orgs/xing/repos) and parse the JSON response. You can find documentation to the call [here](https://developer.github.com/v3/repos/#list-organization-repositories).
 4. Display a list of repositories, each entry showing
 	* name of repository
 	* description
