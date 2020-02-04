@@ -1,11 +1,9 @@
 # XING iOS Coding Challenge
----
 
 Welcome to the XING Coding Challenge! This challenge will give us an idea about your coding skills. You get access to this repository for 48 hours.  We expect this challenge to take you between 4 and 6 hours so please plan accordingly.
 
 
 ## Prerequisites
----
 
 * Use Swift for this challenge.
 * Do not use Storyboards or xib files.
@@ -18,7 +16,6 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 
 
 ## Goals
----
 
 1. Clone this repository. Use it as your working directory.
 2. Bootstrap a new empty application.
@@ -33,7 +30,6 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 
 
 ## Bonus Goals
----
 
 * Cache the data so it is available offline.
 * Implement a load more mechanism. The load more should be triggered when the scrolling is close to reaching the end of the list. Check out the [pagination documentation](https://developer.github.com/v3/#pagination) for more info.
