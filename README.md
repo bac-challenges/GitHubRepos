@@ -8,7 +8,7 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 * Use Swift for this challenge.
 * Do not use Storyboards or xib files.
 * We evaluate the pull request you send based on the [quality checklist](quality_checklist.md).
-* Do not focus too much on the design.
+* Do not focus too much on the design of the UI.
 * The usage of third party libraries (e.g. with CocoaPods) is explicitly allowed.
 * Provide a comprehensive git history.
 * If you want to use different branches, please make sure that they’ll be merged into master branch when you’ll finish the task.
