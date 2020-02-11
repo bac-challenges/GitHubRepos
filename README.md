@@ -38,7 +38,7 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 ## General Advice and Tips
 * Please keep code as simple as possible and remove any unused code.
 * Project is well-structured.
-* Keep in mind the [Separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), the [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) and the Swift [API Design Guidelines] (https://swift.org/documentation/api-design-guidelines/).
+* Keep in mind the [Separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), the [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) and the Swift [API Design Guidelines](https://swift.org/documentation/api-design-guidelines/).
 * Don't forget the tests, they are really important for us.
 * Be conscious and consistent regarding your coding style.
 * Have fun reading and writing code.
