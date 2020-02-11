@@ -7,7 +7,6 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 
 * Use Swift for this challenge.
 * Do not use Storyboards or xib files.
-* We evaluate the pull request you send based on the [quality checklist](quality_checklist.md).
 * Do not focus too much on the design of the UI.
 * The usage of third party libraries (e.g. with CocoaPods) is explicitly allowed.
 * Provide a comprehensive git history.
@@ -36,7 +35,13 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 * On a long-press on a list item show a dialog to ask if should go to repository html_url or owner html_url which is then opened in the browser.
 * Display owner’s avatar image and cache it accordingly.
 
----
-If you have any final comments about your result please let us know via [final_notes.md](final_notes.md)
+## General Advice and Tips
+* Please keep code as simple as possible and remove any unused code.
+* Project is well-structured.
+* Keep in mind the [Separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), the [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) and the Swift [API Design Guidelines] (https://swift.org/documentation/api-design-guidelines/).
+* Don't forget the tests, they are really important for us.
+* Be conscious and consistent regarding your coding style.
+* Have fun reading and writing code.
+* If you have any final comments about your result please let us know via [final_notes.md](final_notes.md)
 
 Now, let's get started. We wish you good luck!
