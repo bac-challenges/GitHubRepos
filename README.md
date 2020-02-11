@@ -33,7 +33,7 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 
 * Cache the data so it is available offline.
 * Implement a load more mechanism. The load more should be triggered when the scrolling is close to reaching the end of the list. Check out the [pagination documentation](https://developer.github.com/v3/#pagination) for more info.
-* On a long click on a list item show a dialog to ask if should go to repository html_url or owner html_url which is then opened in the browser.
+* On a long-press on a list item show a dialog to ask if should go to repository html_url or owner html_url which is then opened in the browser.
 * Display owner’s avatar image and cache it accordingly.
 
 ---
