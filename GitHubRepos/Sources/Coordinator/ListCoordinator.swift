@@ -7,7 +7,16 @@
 
 import UIKit
 
-final class ListCoordinator: Coordinator, NavControllerInjected, ListControllerInjected {
+protocol ListCoordinatorType: Coordinator, AppCoordinatorInjected {
+    func open(_ url: String)
+}
+
+final class ListCoordinator: ListCoordinatorType, NavControllerInjected, ListControllerInjected {
+    
+    func open(_ url: String) {
+        appCoordinator.open(url)
+    }
+    
     func start() {
         navController.pushViewController(listController, animated: false)
     }

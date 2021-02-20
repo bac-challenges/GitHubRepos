@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class ListViewModel: ListModelInjected {
+final class ListViewModel: ListCoordinatorInjected, ListModelInjected {
     
     @Published var items = [ListItem]()
     
@@ -21,6 +21,10 @@ final class ListViewModel: ListModelInjected {
             .map(transform)
             .assign(to: \.items, on: self)
             .store(in: &disposables)
+    }
+    
+    func open(_ url: String) {
+        listCoordinator.open(url)
     }
 }
 

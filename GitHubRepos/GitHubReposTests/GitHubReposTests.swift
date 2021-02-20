@@ -55,6 +55,7 @@ class GitHubReposTests: XCTestCase,
                 XCTAssertEqual(item.name, "name 1")
                 XCTAssertEqual(item.desc, "description 1")
                 XCTAssertEqual(item.login, "login 1")
+                XCTAssertEqual(item.htmlUrl, "https://github.com/")
             })
             .store(in: &disposables)
     }
@@ -73,6 +74,7 @@ class GitHubReposTests: XCTestCase,
                 XCTAssertEqual(item.name, "name 1")
                 XCTAssertEqual(item.desc, "description 1")
                 XCTAssertEqual(item.login, "login 1")
+                XCTAssertEqual(item.htmlUrl, "https://github.com/")
             }
             .store(in: &disposables)
     }

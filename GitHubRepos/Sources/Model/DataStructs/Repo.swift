@@ -14,6 +14,7 @@ struct Repo: Codable, DataItem {
         case desc = "description"
         case fork
         case owner
+        case htmlUrl
     }
     
     struct Owner: Codable {
@@ -24,6 +25,7 @@ struct Repo: Codable, DataItem {
     let desc: String
     let fork: Bool
     let owner: Owner
+    let htmlUrl: String
     
     var login: String {
         owner.login

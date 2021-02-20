@@ -9,8 +9,8 @@ import UIKit
 
 // MARK: - InjectionMap
 struct InjectionMap {
-    static var appCoordinator = AppCoordinator()
-    static var listCoordinator = ListCoordinator()
+    static var appCoordinator: AppCoordinatorType = AppCoordinator()
+    static var listCoordinator: ListCoordinatorType = ListCoordinator()
     static var listController = ListController()
     static var listViewModel = ListViewModel()
     static var listModel: ListModelType = ListModel()
@@ -20,13 +20,13 @@ struct InjectionMap {
 // MARK: AppCoordinator
 protocol AppCoordinatorInjected {}
 extension AppCoordinatorInjected {
-    var appCoordinator: AppCoordinator { get { return InjectionMap.appCoordinator } }
+    var appCoordinator: AppCoordinatorType { get { return InjectionMap.appCoordinator } }
 }
 
 // MARK: ListCoordinator
 protocol ListCoordinatorInjected {}
 extension ListCoordinatorInjected {
-    var listCoordinator: ListCoordinator { get { return InjectionMap.listCoordinator } }
+    var listCoordinator: ListCoordinatorType { get { return InjectionMap.listCoordinator } }
 }
 
 // MARK: ListController

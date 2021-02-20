@@ -32,7 +32,7 @@ struct Service: ServiceType {
         
         guard let url = endpoint.url else { fatalError("BAD URL")}
         
-        return URLSession.shared.dataTaskPublisher(for: url)
+        return URLSession.shared.dataTaskPublisher(for: url, cachedResponseOnError: true)
             .tryMap(tryMap)
             .mapError(mapError)
             .eraseToAnyPublisher()

@@ -29,6 +29,7 @@ final class ListController: UITableViewController, ListViewModelInjected {
         super.viewDidLoad()
         configureView()
         configureBinding()
+        configureLongPress()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +39,7 @@ final class ListController: UITableViewController, ListViewModelInjected {
 }
 
 // MARK: - Actions
-extension ListController {
+private extension ListController {
     func loadItems() {
         indicator.startAnimating()
         listViewModel.get()
@@ -82,5 +83,24 @@ extension ListController {
         cell.configure(items[indexPath.row])
         
         return cell
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+extension ListController: UIGestureRecognizerDelegate {
+    func configureLongPress() {
+        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress))
+        longPressGesture.minimumPressDuration = 0.5
+        longPressGesture.delegate = self
+        tableView.addGestureRecognizer(longPressGesture)
+    }
+    
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
+        if gestureRecognizer.state == .began {
+            let touchPoint = gestureRecognizer.location(in: self.tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                listViewModel.open(items[indexPath.row].htmlUrl)
+            }
+        }
     }
 }

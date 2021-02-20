@@ -13,11 +13,13 @@ struct ListItem {
     let desc: String
     let fork: Bool
     let login: String
+    let htmlUrl: String
     
     init(_ repo: DataItem) {
         name = repo.name
         desc = repo.desc
         fork = repo.fork
         login = repo.login
+        htmlUrl = repo.htmlUrl
     }
 }

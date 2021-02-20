@@ -12,4 +12,5 @@ protocol DataItem {
     var desc: String { get }
     var fork: Bool { get }
     var login: String { get }
+    var htmlUrl: String { get }
 }
