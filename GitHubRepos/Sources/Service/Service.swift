@@ -39,6 +39,21 @@ struct Service: ServiceType {
     }
 }
 
+struct ServiceMock: ServiceType {
+    func get(_ endpoint: EndPointType) -> AnyPublisher<Data, APIError> {
+        
+        guard let url = endpoint.url else { fatalError("BAD URL")}
+
+        guard let data = try? Data(contentsOf: url) else {
+            fatalError("BAD DATA")
+        }
+        
+        return Future<Data, APIError> { promise in
+            promise(.success(data))
+        }.eraseToAnyPublisher()
+    }
+}
+
 // MARK: - Helpers
 private extension Service {
     func tryMap(_ data: Data, _ response: URLResponse) throws -> Data {

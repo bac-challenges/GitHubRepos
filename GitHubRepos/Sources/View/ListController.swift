@@ -10,7 +10,7 @@ import Combine
 
 final class ListController: UITableViewController, ListViewModelInjected {
     
-    private var items = [ListItem]() {
+    @Published var items = [ListItem]() {
         didSet {
             if items.count > 0 {
                 indicator.stopAnimating()
@@ -79,9 +79,7 @@ extension ListController {
             return UITableViewCell()
         }
         
-        let item = items[indexPath.row]
-        
-        cell.configure(item)
+        cell.configure(items[indexPath.row])
         
         return cell
     }

@@ -19,3 +19,11 @@ struct ListModel: ListModelType {
             .eraseToAnyPublisher()
     }
 }
+
+struct ListModelMock: ListModelType {
+    func get() -> AnyPublisher<[Repo], Error> {
+        return service.get(EndPoint.mock)
+            .decode(type: [Repo].self, decoder: jsonDecoder)
+            .eraseToAnyPublisher()
+    }
+}

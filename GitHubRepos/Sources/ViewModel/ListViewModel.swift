@@ -26,7 +26,7 @@ final class ListViewModel: ListModelInjected {
 
 // MARK: - Helpers
 private extension ListViewModel {
-    func transform(_ items: [Repo]) -> [ListItem] {
+    func transform(_ items: [DataItem]) -> [ListItem] {
         items.map { item in
             ListItem(item)
         }
