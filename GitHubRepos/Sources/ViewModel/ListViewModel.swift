@@ -13,7 +13,11 @@ final class ListViewModel: ListCoordinatorInjected, ListModelInjected {
     @Published var items = [ListItem]()
     
     private var disposables: Set<AnyCancellable> = []
-    
+}
+
+// Actions
+extension ListViewModel {
+
     func get() {
         listModel.get()
             .replaceError(with: [])

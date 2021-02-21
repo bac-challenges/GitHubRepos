@@ -65,6 +65,7 @@ extension InjectionMap {
         decoder.dateDecodingStrategy = .millisecondsSince1970
         return decoder
     }
+    static var imageLoader: ImageLoaderType = ImageLoader()
 }
 
 // MARK: UIWindow
@@ -83,4 +84,10 @@ extension NavControllerInjected {
 protocol JSONDecoderInjected {}
 extension JSONDecoderInjected {
     var jsonDecoder: JSONDecoder { get { return InjectionMap.jsonDecoder } }
+}
+
+// MARK: ImageLoader
+protocol ImageLoaderInjected {}
+extension ImageLoaderInjected {
+    var imageLoader: ImageLoaderType { get { return InjectionMap.imageLoader } }
 }

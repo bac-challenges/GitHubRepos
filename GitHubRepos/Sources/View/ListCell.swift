@@ -6,17 +6,23 @@
 //
 
 import UIKit
+import Combine
 
 final class ListCell: UITableViewCell {
     
     // UI
     private let background = ListCell.background
     private let container = ListCell.container
-    private let headerContainer = ListCell.headerContainer
+    private let avatarView = ListCell.avatarView
+    private let indicator = ListCell.indicator
+    private let labelsContainer = ListCell.labelsContainer
     private let spacer = ListCell.spacer
     private let nameLabel = ListCell.nameLabel
     private let loginLabel = ListCell.loginLabel
     private let descLabel = ListCell.descLabel
+    
+    private var cancellable: AnyCancellable?
+    private var animator: UIViewPropertyAnimator?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,6 +34,7 @@ final class ListCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
         resetView()
     }
 }
@@ -42,19 +49,54 @@ extension ListCell: ConfigurableCell {
         // Background
         background.backgroundColor = item.fork ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1):.white
         
-        // Spacer
+        // Activity Indicator
+        indicator.startAnimating()
+        
+       // Spacer
         spacer.backgroundColor = item.fork ? .white:#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
         
         // Labels
         nameLabel.text = item.name
         loginLabel.text = item.login
         descLabel.text = item.desc
+        
+        // Image View
+        cancellable = loadImage(for: item)
+            .sink { [weak self] image in
+                self?.showImage(image: image)
+            }
+    }
+}
+
+// MARK: - ImageLoader
+extension ListCell: ImageLoaderInjected {
+    
+    private func showImage(image: UIImage?) {
+        indicator.stopAnimating()
+        avatarView.alpha = 0.0
+        animator?.stopAnimation(false)
+        avatarView.image = image
+        animator = UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3,
+                                                                  delay: 0,
+                                                                  options: .curveLinear,
+                                                                  animations: {
+            self.avatarView.alpha = 1.0
+        })
+    }
+    
+    private func loadImage(for item: ListItem) -> AnyPublisher<UIImage?, Never> {
+        return Just(item.avatarUrl)
+            .flatMap { url -> AnyPublisher<UIImage?, Never> in
+                self.imageLoader.loadImage(from: url)
+            }
+            .eraseToAnyPublisher()
     }
 }
 
 // MARK: - UI
-extension ListCell {
-    private func setupView() {
+private extension ListCell {
+    
+    func setupView() {
         
         // Cell
         selectionStyle = .none
@@ -64,16 +106,21 @@ extension ListCell {
         // Add views
         addSubview(background)
         background.addSubview(container)
-        headerContainer.addArrangedSubview(nameLabel)
-        headerContainer.addArrangedSubview(loginLabel)
-        container.addArrangedSubview(headerContainer)
-        container.addArrangedSubview(spacer)
-        container.addArrangedSubview(descLabel)
+        
+        avatarView.addSubview(indicator)
+        
+        container.addArrangedSubview(avatarView)
+        container.addArrangedSubview(labelsContainer)
+        
+        labelsContainer.addArrangedSubview(nameLabel)
+        labelsContainer.addArrangedSubview(loginLabel)
+        labelsContainer.addArrangedSubview(spacer)
+        labelsContainer.addArrangedSubview(descLabel)
 
         setupLayout()
     }
     
-    private func setupLayout() {
+    func setupLayout() {
         background.anchor(top: topAnchor, paddingTop: 5,
                           bottom: bottomAnchor, paddingBottom: 5,
                           left: leftAnchor, paddingLeft: 20,
@@ -84,26 +131,33 @@ extension ListCell {
                          left: background.leftAnchor, paddingLeft: 10,
                          right: background.rightAnchor, paddingRight: 10)
         
+        indicator.anchor(centerX: avatarView.centerXAnchor, centerY: avatarView.centerYAnchor)
+        avatarView.anchor(width: 50, height: 50)
+        
         spacer.anchor(height: 1)
     }
     
-    private func resetView() {
+    func resetView() {
         
         // Background
         background.backgroundColor = .white
-        
+
         // Spacer
-        spacer.backgroundColor = .lightGray
+        spacer.backgroundColor = .white
         
         // Labels
         nameLabel.text = ""
         loginLabel.text = ""
         descLabel.text = ""
+        
+        // Image View
+        cancellable?.cancel()
+        animator?.stopAnimation(true)
     }
 }
 
-// MARK: - UIView
-private extension UIView {
+// MARK: - Components
+private extension ListCell {
     static var background: UIView {
         let view = UIView(frame: CGRect.zero)
         view.backgroundColor = .white
@@ -117,23 +171,31 @@ private extension UIView {
     
     static var container: UIStackView {
         let stack = UIStackView(frame: CGRect.zero)
-        stack.spacing = 5
-        stack.axis = .vertical
-        return stack
-    }
-    
-    static var headerContainer: UIStackView {
-        let stack = UIStackView(frame: CGRect.zero)
-        stack.alignment = .bottom
-        stack.distribution = .fill
+        stack.spacing = 10
+        stack.alignment = .top
         stack.axis = .horizontal
         return stack
     }
     
-    static var spacer: UIView {
-        let view = UIView()
-        view.backgroundColor = .lightGray
-        return view
+    static var avatarView: UIImageView {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 10
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
+        imageView.backgroundColor = .white
+        imageView.clipsToBounds = true
+        return imageView
+    }
+    
+    static var indicator: UIActivityIndicatorView {
+        return UIActivityIndicatorView(style: .medium)
+    }
+    
+    static var labelsContainer: UIStackView {
+        let stack = UIStackView(frame: CGRect.zero)
+        stack.spacing = 5
+        stack.axis = .vertical
+        return stack
     }
     
     static var nameLabel: UILabel {
@@ -145,9 +207,14 @@ private extension UIView {
     
     static var loginLabel: UILabel {
         let label = UILabel()
-        label.textAlignment = .right
         label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         return label
+    }
+    
+    static var spacer: UIView {
+        let view = UIView()
+        view.backgroundColor = .lightGray
+        return view
     }
     
     static var descLabel: UILabel {

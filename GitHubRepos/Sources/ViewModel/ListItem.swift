@@ -14,6 +14,7 @@ struct ListItem {
     let fork: Bool
     let login: String
     let htmlUrl: String
+    let avatarUrl: String
     
     init(_ repo: DataItem) {
         name = repo.name
@@ -21,5 +22,6 @@ struct ListItem {
         fork = repo.fork
         login = repo.login
         htmlUrl = repo.htmlUrl
+        avatarUrl = repo.avatarUrl
     }
 }

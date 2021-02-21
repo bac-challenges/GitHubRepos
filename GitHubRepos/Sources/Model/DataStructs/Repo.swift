@@ -19,6 +19,7 @@ struct Repo: Codable, DataItem {
     
     struct Owner: Codable {
         let login: String
+        var avatarUrl: String
     }
     
     let name: String
@@ -26,6 +27,10 @@ struct Repo: Codable, DataItem {
     let fork: Bool
     let owner: Owner
     let htmlUrl: String
+    
+    var avatarUrl: String {
+        owner.avatarUrl
+    }
     
     var login: String {
         owner.login

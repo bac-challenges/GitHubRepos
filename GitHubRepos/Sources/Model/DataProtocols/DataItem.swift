@@ -13,4 +13,5 @@ protocol DataItem {
     var fork: Bool { get }
     var login: String { get }
     var htmlUrl: String { get }
+    var avatarUrl: String { get }
 }

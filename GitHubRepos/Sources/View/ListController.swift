@@ -13,8 +13,8 @@ final class ListController: UITableViewController, ListViewModelInjected {
     @Published var items = [ListItem]() {
         didSet {
             if items.count > 0 {
-                indicator.stopAnimating()
                 tableView.reloadData()
+                indicator.stopAnimating()
             }
         }
     }
@@ -47,7 +47,7 @@ private extension ListController {
 }
 
 // MARK: - Binding
-extension ListController {
+private extension ListController {
     func configureBinding() {
         listViewModel.$items
             .receive(on: RunLoop.main)
@@ -88,14 +88,14 @@ extension ListController {
 
 // MARK: - UIGestureRecognizerDelegate
 extension ListController: UIGestureRecognizerDelegate {
-    func configureLongPress() {
+    private func configureLongPress() {
         let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress))
         longPressGesture.minimumPressDuration = 0.5
         longPressGesture.delegate = self
         tableView.addGestureRecognizer(longPressGesture)
     }
     
-    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
+    @objc private func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
         if gestureRecognizer.state == .began {
             let touchPoint = gestureRecognizer.location(in: self.tableView)
             if let indexPath = tableView.indexPathForRow(at: touchPoint) {
